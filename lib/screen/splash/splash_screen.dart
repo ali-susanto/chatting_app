@@ -18,12 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
                 child: Wrap(
                   alignment: WrapAlignment.center,
                   crossAxisAlignment: WrapCrossAlignment.center,
@@ -84,13 +86,107 @@ class _SplashScreenState extends State<SplashScreen> {
                           )
                         ],
                       ),
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Secure',
+                            style: kTitle,
+                          ),
+                          const SizedBox(height: 15),
+                          const Text(
+                            'Secure your message with encrypted data',
+                            style: kSubtitle,
+                          ),
+                          const Spacer(),
+                          Center(
+                            child: SvgPicture.asset(
+                              'assets/images/secure.svg',
+                              height: 250,
+                              width: 300,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Spacer(),
+                          Center(
+                            child: SvgPicture.asset(
+                              'assets/images/easy.svg',
+                              height: 250,
+                              width: 300,
+                            ),
+                          ),
+                          const Spacer(),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const Text(
+                            'Easy',
+                            style: kTitle,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const Text(
+                            'Easy to use with minimalize UI',
+                            style: kSubtitle,
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
+              ),
+              const Spacer(),
+              SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ...List.generate(
+                        _numPage, (index) => buildDot(index, context))
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      if (_currentPage == _numPage - 1) {
+                        Navigator.pushReplacementNamed(context, '/login');
+                      }
+                      _pageController.nextPage(
+                          duration: const Duration(microseconds: 500),
+                          curve: Curves.easeIn);
+                    },
+                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+                    child: Text((_currentPage == 0) ? 'Get Started' : 'Next')),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  AnimatedContainer buildDot(int index, BuildContext context) {
+    return AnimatedContainer(
+      duration: kThemeAnimationDuration,
+      height: 10.0,
+      width: _currentPage == index ? 10 : 10,
+      margin: const EdgeInsets.only(right: 15.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: _currentPage == index ? kPrimaryColor : kSecondaryColor,
       ),
     );
   }
