@@ -1,3 +1,4 @@
+import 'package:chatting_app/screen/login/login_screen.dart';
 import 'package:chatting_app/screen/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
         primarySwatch: Colors.blue,
       ),
-      routes: {'/splash': (context) => const SplashScreen()},
+      routes: {
+        '/splash': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen()
+      },
       initialRoute: '/splash',
     );
   }
