@@ -169,7 +169,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           curve: Curves.easeIn);
                     },
                     style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                    child: Text((_currentPage == 0) ? 'Get Started' : 'Next')),
+                    child: Text((_currentPage == 2) ? 'Get Started' : 'Next')),
               )
             ],
           ),
